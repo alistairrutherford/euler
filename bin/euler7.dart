@@ -1,6 +1,7 @@
 /**
  * What is the 10001st prime number
  *
+ * Solution uses: Sieve of Eratosthenes
  */
 
 
@@ -73,31 +74,25 @@ int findNextPrime(int p, List entries) {
  */
 main(List<String> args) {
 
-  const int MAX = 999999;
-  const int MAX_COUNT = 10001;
+  const int MAX_VALUES = 999999;
+  const int MAX_COUNT = 10000; // Exclude the 2
 
   /**
    * Sieve of Eratosthenes
    */
 
-  var entries = initialiseValues(MAX);
+  var entries = initialiseValues(MAX_VALUES);
 
   int count = 0;
   int prime = 2;
-  bool finished = false;
-  while (!finished && count < MAX_COUNT) {
+  while (count < MAX_COUNT) {
     markEntries(prime, entries);
 
     prime = findNextPrime(prime, entries);
     if (prime != -1) {
       print('[${count + 1}] Prime : $prime');
       count++;
-    } else {
-      print('Done');
-      finished = true;
     }
-
-
   }
 
 }
