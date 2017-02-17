@@ -1,9 +1,8 @@
 /**
  * What is the 10001st prime number
- * WIP
+ *
  */
 
-import 'dart:math';
 
 /**
  * Represents entry to Sieve.
@@ -13,7 +12,7 @@ class Entry {
   int value;
   bool marked;
 
-  Entry(value, marked);
+  Entry(this.value, this.marked);
 }
 
 /**
@@ -26,8 +25,7 @@ List initialiseValues(int max) {
 
   for (int i = 0; i < max; i++) {
     Entry entry = new Entry(i + 1, false);
-
-    values[i] = entry;
+    values.add(entry);
   }
 
   return values;
@@ -39,35 +37,43 @@ List initialiseValues(int max) {
  */
 void markEntries(int p, List entries) {
 
-  int index = p;
+  int index = p - 1;
   while (index < entries.length) {
-    int target = index + p;
-    entries[target].marked = true;
-    index++;
+    index = index + p;
+    if (index < entries.length) {
+      entries[index].marked = true;
+    }
   }
 
 }
 
-int findPrime(int p, List entries) {
+/**
+ * Find next prime
+ */
+int findNextPrime(int p, List entries) {
 
   int prime = -1;
   bool found = false;
-  int index = p;
+  int index = p ;
 
   while (!found && p < entries.length) {
 
     if (!entries[index].marked) {
       prime = entries[index].value;
       found = true;
-    }
+    } else
+      index++;
   }
 
   return prime;
 }
 
+/**
+ * Main function
+ */
 main(List<String> args) {
 
-  int MAX = 100;
+  const int MAX = 100;
 
   /**
    * Sieve of Eratosthenes
@@ -80,7 +86,7 @@ main(List<String> args) {
   while (!finished) {
     markEntries(prime, entries);
 
-    prime = findPrime(prime, entries);
+    prime = findNextPrime(prime, entries);
     if (prime != -1) {
       print('Prime : $prime');
     } else {
