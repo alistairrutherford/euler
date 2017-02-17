@@ -56,7 +56,7 @@ int findNextPrime(int p, List entries) {
   bool found = false;
   int index = p ;
 
-  while (!found && p < entries.length) {
+  while (!found && index < entries.length) {
 
     if (!entries[index].marked) {
       prime = entries[index].value;
@@ -73,7 +73,8 @@ int findNextPrime(int p, List entries) {
  */
 main(List<String> args) {
 
-  const int MAX = 100;
+  const int MAX = 999999;
+  const int MAX_COUNT = 10001;
 
   /**
    * Sieve of Eratosthenes
@@ -81,18 +82,22 @@ main(List<String> args) {
 
   var entries = initialiseValues(MAX);
 
+  int count = 0;
   int prime = 2;
   bool finished = false;
-  while (!finished) {
+  while (!finished && count < MAX_COUNT) {
     markEntries(prime, entries);
 
     prime = findNextPrime(prime, entries);
     if (prime != -1) {
-      print('Prime : $prime');
+      print('[${count + 1}] Prime : $prime');
+      count++;
     } else {
       print('Done');
       finished = true;
     }
+
+
   }
 
 }
