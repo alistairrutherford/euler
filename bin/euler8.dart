@@ -26,11 +26,25 @@ const String DIGITS = "73167176531330624919225119674426574742355349194934" +
                           "71636269561882670428252483600823257530420752963450";
 main(List<String> args) {
 
+  const int MAX_DIGITS = 13;
+
   int len = DIGITS.length;
+
+  int initial = 0;
+
+  int largest = 0;
+  int current = 1;
 
   for (int i = 0; i < len; i++) {
 
     int value = int.parse(DIGITS[i]);
+
+    if (initial < MAX_DIGITS) {
+      current *= value;
+    } else {
+
+    }
+
 
     print('Num  $value');
   }
