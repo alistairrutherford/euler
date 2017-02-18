@@ -26,4 +26,12 @@ const String DIGITS = "73167176531330624919225119674426574742355349194934" +
                           "71636269561882670428252483600823257530420752963450";
 main(List<String> args) {
 
+  int len = DIGITS.length;
+
+  for (int i = 0; i < len; i++) {
+
+    int value = int.parse(DIGITS[i]);
+
+    print('Num  $value');
+  }
 }
