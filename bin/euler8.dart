@@ -37,34 +37,33 @@ main(List<String> args) {
   int last = 1;
   int skipCount = 0;
 
-  for (int i = 0; i < len; i++) {
 
-    int value = int.parse(DIGITS[i]);
+  int index = 0;
+  while (index < len) {
+
+    int value = int.parse(DIGITS[index]);
 
     // 731 671 765 313 3 0624919225119  6744
 
     // if we get a zeo then skip past the next (MAX_DIGITS) digits
     if (value == 0) {
-      skipCount = MAX_DIGITS ;
+      index += MAX_DIGITS;
       last = 1;
       value = 1;
-      current = 0;
-    }
-
-    if (skipCount == 0) {
-
-      // Multiply consecutive digits up to target set
-      if (initial < MAX_DIGITS) {
-        current *= value;
-        initial++;
-        last = value;
-      } else {
-        current = (current / last).toInt();
-        current *= value;
-        last = value;
-      }
+      current = 1;
     } else
-      skipCount--;
+      index++;
+
+    // Multiply consecutive digits up to target set
+    if (initial < MAX_DIGITS) {
+      current *= value;
+      initial++;
+      last = value;
+    } else {
+      current = (current / last).toInt();
+      current *= value;
+      last = value;
+    }
 
     if (current > largest) {
       largest = current;
