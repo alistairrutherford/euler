@@ -1,7 +1,8 @@
 /**
  * Main function
  *
- * Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
+ * Find the thirteen adjacent digits in the 1000-digit number that have the greatest product.
+ * What is the value of this product?
  *
  */
 const String DIGITS = "73167176531330624919225119674426574742355349194934"
@@ -25,10 +26,9 @@ const String DIGITS = "73167176531330624919225119674426574742355349194934"
                       "05886116467109405077541002256983155200055935729725"
                       "71636269561882670428252483600823257530420752963450";
 
-
 main(List<String> args) {
 
-  const int MAX_DIGITS = 4;
+  const int MAX_DIGITS = 13;
   int len = DIGITS.length;
 
   int digits = 0;
@@ -39,8 +39,6 @@ main(List<String> args) {
   while (index < len) {
 
     int value = int.parse(DIGITS[index]);
-
-    // 730160717653133062
 
     // if we get a zero then rebuild the MAX_DIGITS consecutive digits
     if (value == 0) {
@@ -57,9 +55,6 @@ main(List<String> args) {
       } else {
         int divisor = int.parse(DIGITS[index - MAX_DIGITS]);
 
-        if (divisor == 0) {
-          print('');
-        }
         if (current == 0) {
           current = value;
         } else {
