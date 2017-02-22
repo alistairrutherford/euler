@@ -5,6 +5,8 @@
  * Find the sum of all the primes below two million.
  */
 
+import 'dart:math';
+
 /**
  * Entry to Sieve.
  *
@@ -31,6 +33,7 @@ class SieveOfEratosthenes {
   }
 
   void init(int size) {
+    // Fill sieve with 1..n unmarked
     for (int i = 0; i < size; i++) {
       Entry entry = new Entry(i + 1, false);
       sieve.add(entry);
@@ -40,7 +43,7 @@ class SieveOfEratosthenes {
   void reset() {
     int len = sieve.length;
     for (int i = 0; i < len; i++) {
-      sieve[i].value = 0;
+      sieve[i].value = i + 1;
       sieve[i].mark = false;
     }
   }
@@ -58,59 +61,29 @@ class SieveOfEratosthenes {
     }
   }
 
-}
+  /**
+   * Find next prime
+   */
+  int findNextPrime(int prime) {
 
-/**
- * Build array of entries
- *
- */
-List initialiseValues(int max) {
+    mark(prime);
 
-  var  values = [];
+    int nextPrime = -1;
+    bool found = false;
+    int index = prime - 1;
 
-  for (int i = 0; i < max; i++) {
-    Entry entry = new Entry(i + 1, false);
-    values.add(entry);
-  }
+    while (!found && index < sieve.length) {
 
-  return values;
-}
-
-/**
- * Mark multiples of current prime.
- *
- */
-void markEntries(int p, List entries) {
-
-  int index = p - 1;
-  while (index < entries.length) {
-    index = index + p;
-    if (index < entries.length) {
-      entries[index].marked = true;
+      if (!sieve[index].marked) {
+        nextPrime = sieve[index].value;
+        found = true;
+      } else
+        index++;
     }
+
+    return nextPrime;
   }
 
-}
-
-/**
- * Find next prime
- */
-int findNextPrime(int p, List entries) {
-
-  int prime = -1;
-  bool found = false;
-  int index = p ;
-
-  while (!found && index < entries.length) {
-
-    if (!entries[index].marked) {
-      prime = entries[index].value;
-      found = true;
-    } else
-      index++;
-  }
-
-  return prime;
 }
 
 /**
@@ -119,20 +92,18 @@ int findNextPrime(int p, List entries) {
 main(List<String> args) {
 
   // Lets round up m/ln(n) limit for primes < 2000000
-  const int MAX_VALUES = 180000;
+  const int MAX_PRIME = 2000000;
 
-  /**
-   * Sieve of Eratosthenes
-   */
+  int maxValues = (MAX_PRIME / log(MAX_PRIME)).toInt();
 
-  var entries = initialiseValues(MAX_VALUES);
+  SieveOfEratosthenes sieveOfEratosthenes = new SieveOfEratosthenes(maxValues);
 
   int count = 0;
   int prime = 2;
-  while (prime < MAX_VALUES) {
-    markEntries(prime, entries);
+  while (count < maxValues && prime < MAX_PRIME) {
 
-    prime = findNextPrime(prime, entries);
+    prime = sieveOfEratosthenes.findNextPrime(prime);
+
     if (prime != -1) {
       print('[${count + 1}] Prime : $prime');
       count++;
