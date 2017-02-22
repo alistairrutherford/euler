@@ -6,7 +6,7 @@
  */
 
 /**
- * Represents entry to Sieve.
+ * Entry to Sieve.
  *
  */
 class Entry {
@@ -14,6 +14,50 @@ class Entry {
   bool marked;
 
   Entry(this.value, this.marked);
+}
+
+/**
+ * Sieve.
+ *
+ */
+class SieveOfEratosthenes {
+  List sieve = [];
+
+  /**
+   * Constructor.
+   */
+  SieveOfEratosthenes(int size) {
+    init(size);
+  }
+
+  void init(int size) {
+    for (int i = 0; i < size; i++) {
+      Entry entry = new Entry(i + 1, false);
+      sieve.add(entry);
+    }
+  }
+
+  void reset() {
+    int len = sieve.length;
+    for (int i = 0; i < len; i++) {
+      sieve[i].value = 0;
+      sieve[i].mark = false;
+    }
+  }
+
+  void mark(int prime) {
+    int len = sieve.length;
+    int index = 0;
+    sieve[0] = prime;
+    while (index < len) {
+      index = index + prime;
+      if (index < len) {
+        sieve[index].value = index;
+        sieve[index].marked = true;
+      }
+    }
+  }
+
 }
 
 /**
