@@ -40,22 +40,13 @@ class SieveOfEratosthenes {
     }
   }
 
-  void reset() {
-    int len = sieve.length;
-    for (int i = 0; i < len; i++) {
-      sieve[i].value = i + 1;
-      sieve[i].mark = false;
-    }
-  }
-
   void mark(int prime) {
     int len = sieve.length;
-    int index = 0;
-    sieve[0] = prime;
+    int index = prime - 1;
+
     while (index < len) {
       index = index + prime;
       if (index < len) {
-        sieve[index].value = index;
         sieve[index].marked = true;
       }
     }
@@ -63,6 +54,7 @@ class SieveOfEratosthenes {
 
   /**
    * Find next prime
+   *
    */
   int findNextPrime(int prime) {
 
@@ -70,7 +62,7 @@ class SieveOfEratosthenes {
 
     int nextPrime = -1;
     bool found = false;
-    int index = prime - 1;
+    int index = prime;
 
     while (!found && index < sieve.length) {
 
@@ -92,23 +84,29 @@ class SieveOfEratosthenes {
 main(List<String> args) {
 
   // Lets round up m/ln(n) limit for primes < 2000000
+  const int MAX_VALUES = 2000003;
   const int MAX_PRIME = 2000000;
+  const int START_PRIME = 2;
 
-  int maxValues = (MAX_PRIME / log(MAX_PRIME)).toInt();
+  SieveOfEratosthenes sieveOfEratosthenes = new SieveOfEratosthenes(MAX_VALUES);
 
-  SieveOfEratosthenes sieveOfEratosthenes = new SieveOfEratosthenes(maxValues);
+  int sum = 2;
 
   int count = 0;
-  int prime = 2;
-  while (count < maxValues && prime < MAX_PRIME) {
+  int prime = START_PRIME;
+  while (count < MAX_VALUES && prime < MAX_PRIME) {
 
     prime = sieveOfEratosthenes.findNextPrime(prime);
 
     if (prime != -1) {
       print('[${count + 1}] Prime : $prime');
+
+      sum += prime;
+
       count++;
     }
   }
 
+  print('Result $sum');
 }
 
