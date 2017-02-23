@@ -5,19 +5,6 @@
  * Find the sum of all the primes below two million.
  */
 
-import 'dart:math';
-
-/**
- * Entry to Sieve.
- *
- */
-class Entry {
-  int value;
-  bool marked;
-
-  Entry(this.value, this.marked);
-}
-
 /**
  * Sieve.
  *
@@ -35,7 +22,7 @@ class SieveOfEratosthenes {
   void init(int size) {
     // Fill sieve with 1..n unmarked
     for (int i = 0; i < size; i++) {
-      Entry entry = new Entry(i + 1, false);
+      bool entry = false;
       sieve.add(entry);
     }
   }
@@ -47,7 +34,7 @@ class SieveOfEratosthenes {
     while (index < len) {
       index = index + prime;
       if (index < len) {
-        sieve[index].marked = true;
+        sieve[index]= true;
       }
     }
   }
@@ -66,8 +53,8 @@ class SieveOfEratosthenes {
 
     while (!found && index < sieve.length) {
 
-      if (!sieve[index].marked) {
-        nextPrime = sieve[index].value;
+      if (!sieve[index]) {
+        nextPrime = index + 1;
         found = true;
       } else
         index++;
@@ -103,9 +90,8 @@ main(List<String> args) {
       if (prime < MAX_PRIME) {
         sum += prime;
       }
-
-      count++;
     }
+    count++;
   }
 
   print('Result $sum');
