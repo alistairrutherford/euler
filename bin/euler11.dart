@@ -24,14 +24,86 @@ const String DIGITS = "0802229738150040007504050778521250779108"
                       "2073352978319001743149714886811623570554"
                       "0170547183515469169233486143520189196748";
 
+class GridSum {
+
+  int maxCount;
+  int gridX;
+  int gridY;
+
+  int _top;
+  int _bottom;
+  int _startLine;
+  int _endLine;
+
+  GridSum(int maxCount, int gridX, int gridY) {
+    this.maxCount = maxCount;
+    this.gridX = gridX;
+    this.gridY = gridY;
+
+    // Not calculate a few limits
+    _top = gridX * maxCount;
+    _bottom = (gridX * gridY) - (gridX * maxCount);
+    _startLine = maxCount;
+    _endLine = gridX - maxCount;
+  }
+
+  int sumUp(int index) {
+    int sum = 0;
+
+    if (index > _top) {
+      for (int i = 0; i < maxCount; i++) {
+        int value = int.parse(DIGITS[index - (i * maxCount)]);
+        sum += value;
+      }
+    }
+
+    return sum;
+  }
+
+  int sumDown(int index) {
+    int sum = 0;
+
+    if (index > _bottom) {
+      for (int i = 0; i < maxCount; i++) {
+        int value = int.parse(DIGITS[index + (i * maxCount)]);
+        sum += value;
+      }
+    }
+
+    return sum;
+  }
+
+  int sumLeft(int index) {
+    int sum = 0;
+
+    if (index <_endLine) {
+      for (int i = 0; i < maxCount; i++) {
+        int value = int.parse(DIGITS[index + (i * maxCount)]);
+        sum += value;
+      }
+    }
+
+    return sum;
+  }
+
+
+}
+
 main(List<String> args) {
 
-  const MAX_COUNT = 4;
-  const int GRID_X = 20;
-  const int GRID_Y = 20;
+  int MAX_COUNT = 4;
+  int GRID_X = 20;
+  int GRID_Y = 20;
 
   for (int index = 0; index < DIGITS.length; index++) {
 
+    // Sum left
+
+    // Sum right
+
+    // Sum up
+
+    // Sum down
 
   }
 }
