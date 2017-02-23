@@ -83,7 +83,6 @@ class SieveOfEratosthenes {
  */
 main(List<String> args) {
 
-  // Lets round up m/ln(n) limit for primes < 2000000
   const int MAX_VALUES = 2000003;
   const int MAX_PRIME = 2000000;
   const int START_PRIME = 2;
@@ -101,7 +100,9 @@ main(List<String> args) {
     if (prime != -1) {
       print('[${count + 1}] Prime : $prime');
 
-      sum += prime;
+      if (prime < MAX_PRIME) {
+        sum += prime;
+      }
 
       count++;
     }
