@@ -63,7 +63,7 @@ class GridSum {
   int sumDown(int index) {
     int sum = 0;
 
-    if (index > _bottom) {
+    if (index < _bottom) {
       for (int i = 0; i < maxCount; i++) {
         int value = int.parse(DIGITS[index + (i * maxCount)]);
         sum += value;
