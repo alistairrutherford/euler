@@ -26,4 +26,12 @@ const String DIGITS = "0802229738150040007504050778521250779108"
 
 main(List<String> args) {
 
+  const MAX_COUNT = 4;
+  const int GRID_X = 20;
+  const int GRID_Y = 20;
+
+  for (int index = 0; index < DIGITS.length; index++) {
+
+
+  }
 }
