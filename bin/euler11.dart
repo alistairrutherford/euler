@@ -106,11 +106,12 @@ class GridSum {
   int sumDiagonal(int index) {
     int sum = 0;
 
-    bool valid = (index > _startLine) || ((index > _gridX) && ((index % _gridX) > _startLine));
+    bool valid = ((index < _bottom) && (index < _endLine)) ||
+                 ((index > _gridX) && ((index % _gridX) > _startLine));
 
     if (valid) {
       for (int i = 0; i < _maxCount; i++) {
-        int value = int.parse(DIGITS[index - i]);
+        int value = int.parse(DIGITS[index + (i * _gridX)]);
         sum += value;
       }
     }
@@ -126,15 +127,27 @@ main(List<String> args) {
   int GRID_X = 20;
   int GRID_Y = 20;
 
+  GridSum gridSum = new GridSum(MAX_COUNT, GRID_X, GRID_Y);
+
+  int sum = 0;
+
   for (int index = 0; index < DIGITS.length; index++) {
 
     // Sum left
+    sum += gridSum.sumLeft(index);
 
     // Sum right
+    sum += gridSum.sumRight(index);
 
     // Sum up
+    sum += gridSum.sumUp(index);
 
     // Sum down
+    sum += gridSum.sumDown(index);
 
+    // Sum diagonal
+    sum += gridSum.sumDiagonal(index);
   }
+
+  print('Result is $sum');
 }
