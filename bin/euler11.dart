@@ -26,9 +26,9 @@ const String DIGITS = "0802229738150040007504050778521250779108"
 
 class GridSum {
 
-  int maxCount;
-  int gridX;
-  int gridY;
+  int _maxCount;
+  int _gridX;
+  int _gridY;
 
   int _top;
   int _bottom;
@@ -36,9 +36,9 @@ class GridSum {
   int _endLine;
 
   GridSum(int maxCount, int gridX, int gridY) {
-    this.maxCount = maxCount;
-    this.gridX = gridX;
-    this.gridY = gridY;
+    this._maxCount = maxCount;
+    this._gridX = gridX;
+    this._gridY = gridY;
 
     // Not calculate a few limits
     _top = gridX * maxCount;
@@ -51,8 +51,8 @@ class GridSum {
     int sum = 0;
 
     if (index > _top) {
-      for (int i = 0; i < maxCount; i++) {
-        int value = int.parse(DIGITS[index - (i * maxCount)]);
+      for (int i = 0; i < _maxCount; i++) {
+        int value = int.parse(DIGITS[index - (i * _maxCount)]);
         sum += value;
       }
     }
@@ -64,8 +64,23 @@ class GridSum {
     int sum = 0;
 
     if (index < _bottom) {
-      for (int i = 0; i < maxCount; i++) {
-        int value = int.parse(DIGITS[index + (i * maxCount)]);
+      for (int i = 0; i < _maxCount; i++) {
+        int value = int.parse(DIGITS[index + (i * _maxCount)]);
+        sum += value;
+      }
+    }
+
+    return sum;
+  }
+
+  int sumRight(int index) {
+    int sum = 0;
+
+    bool valid = (index < _endLine) || ((index > _gridX) && ((index % _gridX) < _endLine));
+
+    if (valid) {
+      for (int i = 0; i < _maxCount; i++) {
+        int value = int.parse(DIGITS[index + i]);
         sum += value;
       }
     }
@@ -76,9 +91,11 @@ class GridSum {
   int sumLeft(int index) {
     int sum = 0;
 
-    if (index <_endLine) {
-      for (int i = 0; i < maxCount; i++) {
-        int value = int.parse(DIGITS[index + (i * maxCount)]);
+    bool valid = (index > _startLine) || ((index > _gridX) && ((index % _gridX) > _startLine));
+
+    if (valid) {
+      for (int i = 0; i < _maxCount; i++) {
+        int value = int.parse(DIGITS[index - i]);
         sum += value;
       }
     }
@@ -86,6 +103,20 @@ class GridSum {
     return sum;
   }
 
+  int sumDiagonal(int index) {
+    int sum = 0;
+
+    bool valid = (index > _startLine) || ((index > _gridX) && ((index % _gridX) > _startLine));
+
+    if (valid) {
+      for (int i = 0; i < _maxCount; i++) {
+        int value = int.parse(DIGITS[index - i]);
+        sum += value;
+      }
+    }
+
+    return sum;
+  }
 
 }
 
