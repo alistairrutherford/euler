@@ -35,6 +35,13 @@ class GridSum {
   int _startLine;
   int _endLine;
 
+  /**
+   * Make grid
+   *
+   * @param maxCount
+   * @param gridX
+   * @param gridY
+   */
   GridSum(int maxCount, int gridX, int gridY) {
     this._maxCount = maxCount;
     this._gridX = gridX;
@@ -123,9 +130,9 @@ class GridSum {
 
 main(List<String> args) {
 
-  int MAX_COUNT = 4;
-  int GRID_X = 20;
-  int GRID_Y = 20;
+  const int MAX_COUNT = 4;
+  const int GRID_X = 20;
+  const int GRID_Y = 20;
 
   GridSum gridSum = new GridSum(MAX_COUNT, GRID_X, GRID_Y);
 
