@@ -48,7 +48,7 @@ class GridSum {
     this._gridY = gridY;
 
     // Not calculate a few limits
-    _top = gridX * maxCount;
+    _top = gridX * (maxCount-1);
     _bottom = (gridX * gridY) - (gridX * maxCount);
     _startLine = maxCount;
     _endLine = gridX - maxCount;
