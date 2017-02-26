@@ -54,12 +54,21 @@ class GridSum {
     _endLine = gridX - maxCount;
   }
 
+  int getNumber(int index) {
+
+    int adjusted = index * 2;
+
+    int value = int.parse(DIGITS[adjusted] + DIGITS[adjusted + 1]);
+
+    return value;
+  }
+
   int sumUp(int index) {
     int sum = 0;
 
     if (index > _top) {
       for (int i = 0; i < _maxCount; i++) {
-        int value = int.parse(DIGITS[index - (i * _maxCount)]);
+        int value = getNumber(index - (i * _maxCount));
         sum += value;
       }
     }
@@ -72,7 +81,7 @@ class GridSum {
 
     if (index < _bottom) {
       for (int i = 0; i < _maxCount; i++) {
-        int value = int.parse(DIGITS[index + (i * _maxCount)]);
+        int value = getNumber(index + (i * _maxCount));
         sum += value;
       }
     }
@@ -87,7 +96,7 @@ class GridSum {
 
     if (valid) {
       for (int i = 0; i < _maxCount; i++) {
-        int value = int.parse(DIGITS[index + i]);
+        int value = getNumber(index + i);
         sum += value;
       }
     }
@@ -102,7 +111,7 @@ class GridSum {
 
     if (valid) {
       for (int i = 0; i < _maxCount; i++) {
-        int value = int.parse(DIGITS[index - i]);
+        int value = getNumber(index - i);
         sum += value;
       }
     }
@@ -118,7 +127,7 @@ class GridSum {
 
     if (valid) {
       for (int i = 0; i < _maxCount; i++) {
-        int value = int.parse(DIGITS[index + (i * _gridX)]);
+        int value = getNumber(index + (i * _gridX));
         sum += value;
       }
     }
