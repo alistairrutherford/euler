@@ -71,7 +71,7 @@ class GridSum {
   int sumRight(int index) {
     int sum = 0;
 
-    bool valid = (index < _endLine) || ((index % _gridX) < _endLine);
+    bool valid = (index <= _endLine) || ((index % _gridX) <= _endLine);
 
     if (valid) {
       for (int i = 0; i < _maxCount; i++) {
@@ -79,6 +79,10 @@ class GridSum {
         sum += value;
       }
     }
+    else {
+      print('Invalid sum right $index');
+    }
+
 
     return sum;
   }
@@ -99,8 +103,8 @@ class GridSum {
   int sumDiagonalForward(int index) {
     int sum = 0;
 
-    bool valid = ((index < _bottom) && (index < _endLine)) ||
-        ((index < _bottom) && ((index % _gridX) < _endLine));
+    bool valid = ((index < _bottom) && (index <= _endLine)) ||
+        ((index < _bottom) && ((index % _gridX) <= _endLine));
 
     if (valid) {
       for (int i = 0; i < _maxCount; i++) {
@@ -115,8 +119,8 @@ class GridSum {
   int sumDiagonalBackward(int index) {
     int sum = 0;
 
-    bool valid = ((index < _bottom) && (index > _startLine)) ||
-        ((index < _bottom) && ((index % _gridX) > _startLine));
+    bool valid = ((index < _bottom) && (index >=_startLine)) ||
+        ((index < _bottom) && ((index % _gridX) >= _startLine));
 
     if (valid) {
       for (int i = 0; i < _maxCount; i++) {
