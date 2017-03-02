@@ -3,6 +3,19 @@
  * (up, down, left, right, or diagonally) in the 20×20 grid?
  */
 
+const String DIGITS = "01010101010101010101"
+                      "01010101010101010101"
+                      "01010101010101010101"
+                      "01010101010101010101"
+                      "01010101010101010101"
+                      "01010101020101010101"
+                      "01010101010301010101"
+                      "01010101010104010101"
+                      "01010101010101010101"
+                      "01010101010101010101"
+                      "01010101010101010101";
+
+/*
 const String DIGITS = "0802229738150040007504050778521250779108"
     "4949994017811857608717409843694804566200"
     "8149317355791429937140675388300349133665"
@@ -23,8 +36,9 @@ const String DIGITS = "0802229738150040007504050778521250779108"
     "2069364172302388346299698267598574043616"
     "2073352978319001743149714886811623570554"
     "0170547183515469169233486143520189196748";
+*/
 
-class GridSum {
+class GridProduct {
 
   int _maxCount;
   int _gridX;
@@ -42,7 +56,7 @@ class GridSum {
    * @param gridX Width in digit count.
    * @param gridY Height in digit count.
    */
-  GridSum(int maxCount, int gridX, int gridY) {
+  GridProduct(int maxCount, int gridX, int gridY) {
     this._maxCount = maxCount;
     this._gridX = gridX;
     this._gridY = gridY;
@@ -68,40 +82,37 @@ class GridSum {
     return value;
   }
 
-  int sumRight(int index) {
-    int sum = 0;
+  int productRight(int index) {
+    int product = 1;
 
     bool valid = (index <= _endLine) || ((index % _gridX) <= _endLine);
 
     if (valid) {
       for (int i = 0; i < _maxCount; i++) {
         int value = getNumber(index + i);
-        sum += value;
+        product *= value;
       }
     }
-    else {
-      print('Invalid sum right $index');
-    }
 
 
-    return sum;
+    return product;
   }
 
-  int sumDown(int index) {
-    int sum = 0;
+  int productDown(int index) {
+    int product = 1;
 
     if (index < _bottom) {
       for (int i = 0; i < _maxCount; i++) {
         int value = getNumber(index + (i * _gridX));
-        sum += value;
+        product *= value;
       }
     }
 
-    return sum;
+    return product;
   }
 
-  int sumDiagonalForward(int index) {
-    int sum = 0;
+  int productDiagonalForward(int index) {
+    int product = 1;
 
     bool valid = ((index < _bottom) && (index <= _endLine)) ||
         ((index < _bottom) && ((index % _gridX) <= _endLine));
@@ -109,15 +120,15 @@ class GridSum {
     if (valid) {
       for (int i = 0; i < _maxCount; i++) {
         int value = getNumber(index + (i * _gridX));
-        sum += value;
+        product *= value;
       }
     }
 
-    return sum;
+    return product;
   }
 
-  int sumDiagonalBackward(int index) {
-    int sum = 0;
+  int productDiagonalBackward(int index) {
+    int product = 1;
 
     bool valid = ((index < _bottom) && (index >=_startLine)) ||
         ((index < _bottom) && ((index % _gridX) >= _startLine));
@@ -125,40 +136,60 @@ class GridSum {
     if (valid) {
       for (int i = 0; i < _maxCount; i++) {
         int value = getNumber(index + (i * _gridX));
-        sum += value;
+        product *= value;
       }
     }
 
-    return sum;
+    return product;
   }
 
+}
+
+int setMax(int value, int max) {
+  int maxValue = max;
+
+  if (value > max) {
+    maxValue = value;
+  }
+
+  return maxValue;
 }
 
 main(List<String> args) {
 
   const int MAX_COUNT = 4;
-  const int GRID_X = 20;
-  const int GRID_Y = 20;
+  const int GRID_X = 10;
+  const int GRID_Y = 10;
 
-  GridSum gridSum = new GridSum(MAX_COUNT, GRID_X, GRID_Y);
+  GridProduct gridProduct = new GridProduct(MAX_COUNT, GRID_X, GRID_Y);
 
-  int sum = 0;
   int length = DIGITS.length ~/ 2;
+
+  int max = 0;
 
   for (int index = 0; index < length; index++) {
 
-    // Sum right
-    sum += gridSum.sumRight(index);
+    // right
+    int value = gridProduct.productRight(index);
 
-    // Sum down
-    sum += gridSum.sumDown(index);
+    max = setMax(value, max);
 
-    // Sum diagonal
-    sum += gridSum.sumDiagonalForward(index);
+    // down
+    value = gridProduct.productDown(index);
 
-    // Sum diagonal
-    sum += gridSum.sumDiagonalBackward(index);
+    max = setMax(value, max);
+
+    // diagonal
+    value = gridProduct.productDiagonalForward(index);
+
+    max = setMax(value, max);
+
+    // diagonal
+    value = gridProduct.productDiagonalBackward(index);
+
+    max = setMax(value, max);
+
   }
 
-  print('Result is $sum');
+  print('Result is $max');
 }
