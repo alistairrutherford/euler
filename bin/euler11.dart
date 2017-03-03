@@ -3,19 +3,6 @@
  * (up, down, left, right, or diagonally) in the 20×20 grid?
  */
 
-const String DIGITS = "01010101010101010101"
-                      "01010101010101010101"
-                      "01010101010101010101"
-                      "01010101010101010101"
-                      "01010101010101010101"
-                      "01010101020101010101"
-                      "01010101010301010101"
-                      "01010101010104010101"
-                      "01010101010101010101"
-                      "01010101010101010101"
-                      "01010101010101010101";
-
-/*
 const String DIGITS = "0802229738150040007504050778521250779108"
     "4949994017811857608717409843694804566200"
     "8149317355791429937140675388300349133665"
@@ -36,7 +23,6 @@ const String DIGITS = "0802229738150040007504050778521250779108"
     "2069364172302388346299698267598574043616"
     "2073352978319001743149714886811623570554"
     "0170547183515469169233486143520189196748";
-*/
 
 class GridProduct {
 
@@ -94,7 +80,6 @@ class GridProduct {
       }
     }
 
-
     return product;
   }
 
@@ -119,7 +104,8 @@ class GridProduct {
 
     if (valid) {
       for (int i = 0; i < _maxCount; i++) {
-        int value = getNumber(index + (i * _gridX));
+        int value = getNumber(index + (i * _gridX) + i);
+
         product *= value;
       }
     }
@@ -135,7 +121,7 @@ class GridProduct {
 
     if (valid) {
       for (int i = 0; i < _maxCount; i++) {
-        int value = getNumber(index + (i * _gridX));
+        int value = getNumber(index + (i * _gridX) - i);
         product *= value;
       }
     }
@@ -158,8 +144,8 @@ int setMax(int value, int max) {
 main(List<String> args) {
 
   const int MAX_COUNT = 4;
-  const int GRID_X = 10;
-  const int GRID_Y = 10;
+  const int GRID_X = 20;
+  const int GRID_Y = 20;
 
   GridProduct gridProduct = new GridProduct(MAX_COUNT, GRID_X, GRID_Y);
 
