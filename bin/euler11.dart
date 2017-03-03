@@ -38,7 +38,7 @@ class GridProduct {
   /**
    * Make grid
    *
-   * @param maxCount The max digits to sum.
+   * @param maxCount The max digits to multiply.
    * @param gridX Width in digit count.
    * @param gridY Height in digit count.
    */
