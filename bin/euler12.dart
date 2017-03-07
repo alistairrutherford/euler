@@ -28,8 +28,11 @@ main(List<String> args) {
     }
 
     if (factorCount >= FACTOR_TARGET) {
-
+      found = true;
+    } else {
+      index++;
     }
+
   }
 
   print('Result is $count');
