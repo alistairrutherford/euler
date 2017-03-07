@@ -10,23 +10,27 @@ main(List<String> args) {
 
   bool found = false;
   int index = 1;
+  int answer = -1;
 
   while (!found) {
-    int value = (index * (index + 1)) ~/ 2;
+    // Find triangle number total.
+    int total = (index * (index + 1)) ~/ 2;
 
     int factorCount = 1;
 
-    int limit = sqrt(value).toInt();
+    int limit = sqrt(total).toInt();
 
-    for (int factor = index; factor < limit; factor++) {
+    // For each possible factor up to square root on N.
+    for (int factor = 2; factor <= limit; factor++) {
 
-      if (factor % factorCount == 0) {
+      if (total % factor == 0) {
         factorCount++;
       }
     }
 
     if (factorCount >= FACTOR_TARGET) {
       found = true;
+      answer = total;
     } else {
       index++;
     }
