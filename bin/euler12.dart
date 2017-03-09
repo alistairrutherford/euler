@@ -23,7 +23,7 @@ main(List<String> args) {
     for (int factor = 2; factor <= limit; factor++) {
 
       if (total % factor == 0) {
-        factorCount+=2;
+        factorCount +=2;
       }
     }
 
