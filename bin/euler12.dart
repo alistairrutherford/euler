@@ -20,13 +20,15 @@ main(List<String> args) {
 
     int limit = sqrt(total).toInt();
 
-    // For each possible factor up to square root on N.
+    // For each possible factor up to square root of N.
     for (int factor = 2; factor <= limit; factor++) {
 
       if (total % factor == 0) {
-        factorCount++;
+        factorCount+=2;
       }
     }
+
+    print('Total : $total, Factor count: $factorCount');
 
     if (factorCount >= FACTOR_TARGET) {
       found = true;
@@ -37,5 +39,5 @@ main(List<String> args) {
 
   }
 
-  print('Result is $index');
+  print('Result is $answer');
 }
