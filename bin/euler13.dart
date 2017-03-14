@@ -107,4 +107,22 @@ const String DIGITS = "37107287533902102798797998220837590246510135740250"
 
 main(List<String> args) {
 
+  const int GRID_X = 50;
+  const int GRID_Y = 100;
+
+
+
+
+}
+
+/**
+ * Extract number as two digits from grid.
+ *
+ * @param index
+ */
+int getNumber(int index) {
+
+  int value = int.parse(DIGITS[index]);
+
+  return value;
 }
