@@ -109,7 +109,7 @@ main(List<String> args) {
 
   const int GRID_X = 50;
   const int GRID_Y = 100;
-  const int DIGITS_COUNT = 50; //10;
+  const int DIGITS_COUNT = 50;
 
   BigInteger result = new BigInteger(0);
 
