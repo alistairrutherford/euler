@@ -2,7 +2,7 @@
  * Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
  *
  */
-import 'dart:math';
+import 'package:bignum/bignum.dart';
 
 const String DIGITS = "37107287533902102798797998220837590246510135740250"
                       "46376937677490009712648124896970078050417018260538"
@@ -109,20 +109,24 @@ main(List<String> args) {
 
   const int GRID_X = 50;
   const int GRID_Y = 100;
+  const int DIGITS_COUNT = 50; //10;
 
+  BigInteger result = new BigInteger(0);
 
+  int index = 0;
 
+  int max = (GRID_X * GRID_Y) - DIGITS_COUNT;
 
-}
+  while (index <= max) {
 
-/**
- * Extract number as two digits from grid.
- *
- * @param index
- */
-int getNumber(int index) {
+    String numStr = DIGITS.substring(index, index + DIGITS_COUNT);
 
-  int value = int.parse(DIGITS[index]);
+    BigInteger value = new BigInteger(numStr);
 
-  return value;
+    result += value;
+
+    index += GRID_X;
+  }
+
+  print('Result : $result');
 }
