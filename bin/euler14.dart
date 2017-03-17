@@ -53,7 +53,7 @@ int runChain(int starting, int limit) {
 
     if (current % 2 ==0) {
       // Even
-      current ~/ 2;
+      current = current ~/ 2;
     }
     else {
       // Odd
