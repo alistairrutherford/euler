@@ -24,7 +24,7 @@ main(List<String> args) {
   int value = 13;
   int maxChain = 0;
   int maxStarting = 0;
-  while (value < MAX) {
+  while (value <= MAX) {
     int chain = runChain(value, MAX);
 
     if (chain > maxChain) {
