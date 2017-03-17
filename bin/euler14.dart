@@ -20,6 +20,53 @@
 main(List<String> args) {
   const int MAX = 1000000;
 
+  // Build every chain
+  int value = 13;
+  int maxChain = 0;
+  int maxStarting = 0;
+  while (value < MAX) {
+    int chain = runChain(value, MAX);
 
+    if (chain > maxChain) {
+      maxChain = chain;
+      maxStarting = value;
+    }
+
+    value++;
+  }
+
+  print('Starting: $maxStarting, Chain length: $maxChain');
+}
+
+/**
+ * Run chain with limit number of turns.
+ *
+ */
+int runChain(int starting, int limit) {
+  bool complete = false;
+
+  int current = starting;
+
+  int index = 0;
+
+  while (!complete && index < limit) {
+
+    if (current % 2 ==0) {
+      // Even
+      current ~/ 2;
+    }
+    else {
+      // Odd
+      current = (3 * current) + 1;
+    }
+
+    if (current <= 1) {
+      complete = true;
+    }
+
+    index ++;
+  }
+
+  return index;
 }
 
