@@ -4,7 +4,6 @@
  * Solution uses: Sieve of Eratosthenes
  */
 
-
 /**
  * Represents entry to Sieve.
  *
